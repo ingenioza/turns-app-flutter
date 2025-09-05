@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "204340310004",
+    "project_id": "turns-ccc9e",
+    "storage_bucket": "turns-ccc9e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204340310004:android:5648c217def721fda913a1",
+        "android_client_info": {
+          "package_name": "za.co.ingenio.turns"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "204340310004-n92dno3rjdior8a5f9j2ae2i6q56ic9r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQ5pjBe_d2dzLaCppTluvy8jV2UGetivg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "204340310004-n92dno3rjdior8a5f9j2ae2i6q56ic9r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "204340310004-60k802e655cn2l0tbq3oel41bt0qlph2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "za.co.ingenio.turns"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

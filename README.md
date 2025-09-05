@@ -6,6 +6,17 @@
 
 A Flutter application for group turn-taking and decision making, owned and maintained by **inGenIO**.
 
+## ✅ Current Status
+
+**Foundation Complete!** 🎉
+- ✅ Clean Architecture implementation
+- ✅ Firebase authentication configured (Google, Email/Password, Anonymous)
+- ✅ Material 3 theming with light/dark mode
+- ✅ Navigation and routing setup
+- ✅ Dependency injection ready
+- ✅ Network and storage services
+- ✅ Testing framework configured
+
 ## Features
 
 - **Quick Sessions**: Anonymous, one-time use for fast decisions
@@ -13,17 +24,19 @@ A Flutter application for group turn-taking and decision making, owned and maint
 - **Multiple Algorithms**: Random, round-robin, weighted, and custom rules
 - **Cross-platform**: Mobile (iOS/Android) and Web support
 - **Modern UI**: Clean, intuitive interface with animations
+- **Firebase Auth**: Google Sign-In, Email/Password, Anonymous login
 
 ## Getting Started
 
 ### Prerequisites
 
-- Flutter SDK (latest stable version)
-- Dart SDK (comes with Flutter)
+- Flutter 3.24+
+- Dart 3.6+
+- Firebase project configured
 - Android Studio / Xcode for mobile development
 - VS Code with Flutter extension (recommended)
 
-### Installation
+### Quick Setup
 
 1. Clone the repository:
 ```bash
@@ -36,7 +49,12 @@ cd turns/turns-flutter
 flutter pub get
 ```
 
-3. Run the app:
+3. Generate code:
+```bash
+dart run build_runner build
+```
+
+4. Run the app:
 ```bash
 # For development
 flutter run
@@ -48,6 +66,13 @@ flutter run -d chrome
 flutter devices
 flutter run -d <device_id>
 ```
+
+### Firebase Setup ✅ COMPLETED
+Firebase authentication is configured with:
+- Google Sign-In enabled
+- Email/Password authentication enabled
+- Anonymous authentication enabled
+- All required configuration files imported
 
 ### Building
 
