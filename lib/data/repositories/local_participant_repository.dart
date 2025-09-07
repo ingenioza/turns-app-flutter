@@ -26,7 +26,7 @@ class LocalParticipantRepository implements ParticipantRepository {
   @override
   Future<Participant> updateParticipant(Participant participant) async {
     _participantsById[participant.id] = participant;
-    
+
     // Update in group lists
     for (final groupParticipants in _participantsByGroup.values) {
       for (int i = 0; i < groupParticipants.length; i++) {
@@ -36,14 +36,14 @@ class LocalParticipantRepository implements ParticipantRepository {
         }
       }
     }
-    
+
     return participant;
   }
 
   @override
   Future<void> deleteParticipant(String participantId) async {
     _participantsById.remove(participantId);
-    
+
     // Remove from all groups
     for (final groupParticipants in _participantsByGroup.values) {
       groupParticipants.removeWhere((p) => p.id == participantId);
@@ -56,19 +56,19 @@ class LocalParticipantRepository implements ParticipantRepository {
     List<Participant> participants,
   ) async {
     final groupParticipants = _participantsByGroup[groupId] ?? [];
-    
+
     for (final participant in participants) {
       // Check for duplicate names
       final duplicateName = groupParticipants.any(
         (p) => p.name.toLowerCase() == participant.name.toLowerCase(),
       );
-      
+
       if (!duplicateName) {
         groupParticipants.add(participant);
         _participantsById[participant.id] = participant;
       }
     }
-    
+
     _participantsByGroup[groupId] = groupParticipants;
     return groupParticipants;
   }
@@ -84,7 +84,8 @@ class LocalParticipantRepository implements ParticipantRepository {
   }
 
   @override
-  Future<Participant> updateTurnCount(String participantId, int newTurnCount) async {
+  Future<Participant> updateTurnCount(
+      String participantId, int newTurnCount) async {
     final participant = _participantsById[participantId];
     if (participant == null) {
       throw Exception('Participant not found');
@@ -101,14 +102,14 @@ class LocalParticipantRepository implements ParticipantRepository {
   @override
   Future<void> resetTurnCounts(String groupId) async {
     final groupParticipants = _participantsByGroup[groupId] ?? [];
-    
+
     for (int i = 0; i < groupParticipants.length; i++) {
       final participant = groupParticipants[i];
       final resetParticipant = participant.copyWith(
         turnCount: 0,
         updatedAt: DateTime.now(),
       );
-      
+
       groupParticipants[i] = resetParticipant;
       _participantsById[participant.id] = resetParticipant;
     }
@@ -145,21 +146,22 @@ class LocalParticipantRepository implements ParticipantRepository {
   ) async {
     final allParticipants = await getParticipantsByGroupId(groupId);
     final lowerQuery = query.toLowerCase();
-    
+
     return allParticipants
         .where((p) => p.name.toLowerCase().contains(lowerQuery))
         .toList();
   }
 
   /// Helper method to add a participant to a specific group (for demo purposes)
-  Future<void> addParticipantToGroup(String groupId, Participant participant) async {
+  Future<void> addParticipantToGroup(
+      String groupId, Participant participant) async {
     final groupParticipants = _participantsByGroup[groupId] ?? [];
-    
+
     // Check for duplicate names
     final duplicateName = groupParticipants.any(
       (p) => p.name.toLowerCase() == participant.name.toLowerCase(),
     );
-    
+
     if (!duplicateName) {
       groupParticipants.add(participant);
       _participantsByGroup[groupId] = groupParticipants;

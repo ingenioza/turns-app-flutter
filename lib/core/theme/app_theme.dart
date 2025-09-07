@@ -20,7 +20,7 @@ class AppTheme {
         onSurface: AppColors.textPrimaryLight,
         onError: AppColors.white,
       ),
-      
+
       // App Bar Theme
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.white,
@@ -32,7 +32,7 @@ class AppTheme {
           statusBarIconBrightness: Brightness.dark,
         ),
       ),
-      
+
       // Card Theme
       cardTheme: CardTheme(
         color: AppColors.surfaceLight,
@@ -42,7 +42,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(12),
         ),
       ),
-      
+
       // Elevated Button Theme
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -55,7 +55,7 @@ class AppTheme {
           elevation: 2,
         ),
       ),
-      
+
       // Outlined Button Theme
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
@@ -67,7 +67,7 @@ class AppTheme {
           side: const BorderSide(color: AppColors.primary),
         ),
       ),
-      
+
       // Text Button Theme
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
@@ -75,7 +75,7 @@ class AppTheme {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         ),
       ),
-      
+
       // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -102,7 +102,7 @@ class AppTheme {
         ),
         contentPadding: const EdgeInsets.all(16),
       ),
-      
+
       // Bottom Navigation Bar Theme
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColors.white,
@@ -111,14 +111,14 @@ class AppTheme {
         type: BottomNavigationBarType.fixed,
         elevation: 8,
       ),
-      
+
       // Floating Action Button Theme
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.white,
         elevation: 4,
       ),
-      
+
       // Chip Theme
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.grey100,
@@ -128,7 +128,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(16),
         ),
       ),
-      
+
       // Dialog Theme
       dialogTheme: DialogTheme(
         backgroundColor: AppColors.white,
@@ -137,16 +137,16 @@ class AppTheme {
         ),
         elevation: 8,
       ),
-      
+
       // Divider Theme
       dividerTheme: const DividerThemeData(
         color: AppColors.borderLight,
         thickness: 1,
       ),
-      
+
       // Text Theme
       textTheme: _buildTextTheme(AppColors.textPrimaryLight),
-      
+
       // Icon Theme
       iconTheme: const IconThemeData(
         color: AppColors.textSecondaryLight,
@@ -154,7 +154,7 @@ class AppTheme {
       ),
     );
   }
-  
+
   static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: true,
@@ -171,7 +171,7 @@ class AppTheme {
         onSurface: AppColors.textPrimaryDark,
         onError: AppColors.black,
       ),
-      
+
       // App Bar Theme
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.surfaceDark,
@@ -183,7 +183,7 @@ class AppTheme {
           statusBarIconBrightness: Brightness.light,
         ),
       ),
-      
+
       // Card Theme
       cardTheme: CardTheme(
         color: AppColors.surfaceDark,
@@ -193,7 +193,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(12),
         ),
       ),
-      
+
       // Elevated Button Theme
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -206,7 +206,7 @@ class AppTheme {
           elevation: 2,
         ),
       ),
-      
+
       // Outlined Button Theme
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
@@ -218,7 +218,7 @@ class AppTheme {
           side: const BorderSide(color: AppColors.primaryLight),
         ),
       ),
-      
+
       // Text Button Theme
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
@@ -226,7 +226,7 @@ class AppTheme {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         ),
       ),
-      
+
       // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -253,7 +253,7 @@ class AppTheme {
         ),
         contentPadding: const EdgeInsets.all(16),
       ),
-      
+
       // Bottom Navigation Bar Theme
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColors.surfaceDark,
@@ -262,14 +262,14 @@ class AppTheme {
         type: BottomNavigationBarType.fixed,
         elevation: 8,
       ),
-      
+
       // Floating Action Button Theme
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: AppColors.primaryLight,
         foregroundColor: AppColors.black,
         elevation: 4,
       ),
-      
+
       // Chip Theme
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.grey700,
@@ -279,7 +279,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(16),
         ),
       ),
-      
+
       // Dialog Theme
       dialogTheme: DialogTheme(
         backgroundColor: AppColors.surfaceDark,
@@ -288,16 +288,16 @@ class AppTheme {
         ),
         elevation: 8,
       ),
-      
+
       // Divider Theme
       dividerTheme: const DividerThemeData(
         color: AppColors.borderDark,
         thickness: 1,
       ),
-      
+
       // Text Theme
       textTheme: _buildTextTheme(AppColors.textPrimaryDark),
-      
+
       // Icon Theme
       iconTheme: const IconThemeData(
         color: AppColors.textSecondaryDark,
@@ -305,7 +305,7 @@ class AppTheme {
       ),
     );
   }
-  
+
   static TextTheme _buildTextTheme(Color baseColor) {
     return TextTheme(
       // Display styles
@@ -327,7 +327,7 @@ class AppTheme {
         letterSpacing: 0,
         color: baseColor,
       ),
-      
+
       // Headline styles
       headlineLarge: TextStyle(
         fontSize: 32,
@@ -347,7 +347,7 @@ class AppTheme {
         letterSpacing: 0,
         color: baseColor,
       ),
-      
+
       // Title styles
       titleLarge: TextStyle(
         fontSize: 22,
@@ -367,7 +367,7 @@ class AppTheme {
         letterSpacing: 0.1,
         color: baseColor,
       ),
-      
+
       // Body styles
       bodyLarge: TextStyle(
         fontSize: 16,
@@ -387,7 +387,7 @@ class AppTheme {
         letterSpacing: 0.4,
         color: baseColor,
       ),
-      
+
       // Label styles
       labelLarge: TextStyle(
         fontSize: 14,

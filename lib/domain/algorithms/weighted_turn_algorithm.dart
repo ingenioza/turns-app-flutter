@@ -13,7 +13,7 @@ class WeightedTurnAlgorithm extends TurnAlgorithm {
   String get name => 'Weighted';
 
   @override
-  String get description => 
+  String get description =>
       'Selects participants based on their weights. Higher weight = higher chance.';
 
   @override
@@ -27,19 +27,18 @@ class WeightedTurnAlgorithm extends TurnAlgorithm {
     }
 
     final activeParticipants = getActiveParticipants(participants);
-    
+
     // Calculate total weight
-    final totalWeight = activeParticipants
-        .map((p) => p.weight)
-        .reduce((a, b) => a + b);
-    
+    final totalWeight =
+        activeParticipants.map((p) => p.weight).reduce((a, b) => a + b);
+
     if (totalWeight <= 0) {
       throw ArgumentError('Total weight must be greater than 0');
     }
-    
+
     // Generate random number between 0 and total weight
     final randomWeight = _random.nextDouble() * totalWeight;
-    
+
     // Find participant based on weighted selection
     double currentWeight = 0;
     for (final participant in activeParticipants) {
@@ -48,7 +47,7 @@ class WeightedTurnAlgorithm extends TurnAlgorithm {
         return participant;
       }
     }
-    
+
     // Fallback (should not reach here)
     return activeParticipants.last;
   }
@@ -56,7 +55,7 @@ class WeightedTurnAlgorithm extends TurnAlgorithm {
   @override
   bool canApply(List<Participant> participants) {
     final activeParticipants = getActiveParticipants(participants);
-    return activeParticipants.isNotEmpty && 
-           activeParticipants.any((p) => p.weight > 0);
+    return activeParticipants.isNotEmpty &&
+        activeParticipants.any((p) => p.weight > 0);
   }
 }

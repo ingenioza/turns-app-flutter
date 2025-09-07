@@ -22,9 +22,9 @@ class AddParticipant implements UseCase<Participant, AddParticipantParams> {
       }
 
       // Check for duplicate names in the group
-      final existingParticipants = await repository
-          .getParticipantsByGroupId(params.groupId);
-      
+      final existingParticipants =
+          await repository.getParticipantsByGroupId(params.groupId);
+
       final duplicateName = existingParticipants.any(
         (p) => p.name.toLowerCase() == params.participant.name.toLowerCase(),
       );
@@ -35,7 +35,8 @@ class AddParticipant implements UseCase<Participant, AddParticipantParams> {
         ));
       }
 
-      final participant = await repository.createParticipant(params.participant);
+      final participant =
+          await repository.createParticipant(params.participant);
       return Right(participant);
     } catch (e) {
       return Left(ServerFailure(message: e.toString()));

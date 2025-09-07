@@ -20,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> _navigateToHome() async {
     // Simulate initialization time
     await Future.delayed(const Duration(seconds: 2));
-    
+
     if (mounted) {
       context.go('/home');
     }
@@ -49,26 +49,26 @@ class _SplashPageState extends State<SplashPage> {
               ),
             ),
             const SizedBox(height: 32),
-            
+
             // App Name
             Text(
               'Turns',
               style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                color: AppColors.white,
-                fontWeight: FontWeight.bold,
-              ),
+                    color: AppColors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 8),
-            
+
             // App Tagline
             Text(
               'Fair turn-taking made simple',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: AppColors.white.withValues(alpha: 0.8),
-              ),
+                    color: AppColors.white.withValues(alpha: 0.8),
+                  ),
             ),
             const SizedBox(height: 48),
-            
+
             // Loading Indicator
             const CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(AppColors.white),

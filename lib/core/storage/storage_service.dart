@@ -63,7 +63,7 @@ class StorageService {
   Map<String, dynamic>? getJson(String key) {
     final jsonString = getString(key);
     if (jsonString == null) return null;
-    
+
     try {
       return json.decode(jsonString) as Map<String, dynamic>;
     } catch (e) {

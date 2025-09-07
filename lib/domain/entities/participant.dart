@@ -4,28 +4,28 @@ import 'package:equatable/equatable.dart';
 class Participant extends Equatable {
   /// Unique identifier for the participant
   final String id;
-  
+
   /// Display name of the participant
   final String name;
-  
+
   /// Optional avatar/profile image URL
   final String? avatarUrl;
-  
+
   /// Optional custom color for UI representation
   final String? color;
-  
+
   /// Weight for weighted turn algorithms (default: 1.0)
   final double weight;
-  
+
   /// Whether this participant is currently active
   final bool isActive;
-  
+
   /// Number of turns this participant has taken
   final int turnCount;
-  
+
   /// Timestamp when participant was created
   final DateTime createdAt;
-  
+
   /// Timestamp when participant was last updated
   final DateTime? updatedAt;
 

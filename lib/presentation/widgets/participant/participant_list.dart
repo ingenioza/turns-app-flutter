@@ -36,16 +36,20 @@ class ParticipantList extends StatelessWidget {
             Icon(
               Icons.people_outline,
               size: 64,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+              color: Theme.of(context)
+                  .colorScheme
+                  .onSurface
+                  .withValues(alpha: 0.3),
             ),
             const SizedBox(height: 16),
             Text(
-              showOnlyActive 
-                  ? 'No active participants'
-                  : 'No participants yet',
+              showOnlyActive ? 'No active participants' : 'No participants yet',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
-              ),
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withValues(alpha: 0.6),
+                  ),
             ),
             const SizedBox(height: 8),
             Text(
@@ -53,8 +57,11 @@ class ParticipantList extends StatelessWidget {
                   ? 'Activate some participants to get started'
                   : 'Add participants to get started',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
-              ),
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withValues(alpha: 0.5),
+                  ),
             ),
           ],
         ),
@@ -65,11 +72,11 @@ class ParticipantList extends StatelessWidget {
       itemCount: filteredParticipants.length,
       itemBuilder: (context, index) {
         final participant = filteredParticipants[index];
-        
+
         return ParticipantItem(
           participant: participant,
           showActions: showActions,
-          onTap: onParticipantTap != null 
+          onTap: onParticipantTap != null
               ? () => onParticipantTap!(participant)
               : null,
           onToggleStatus: onToggleStatus != null
@@ -98,7 +105,7 @@ class ParticipantSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Card(
       margin: const EdgeInsets.all(16),
       child: Padding(

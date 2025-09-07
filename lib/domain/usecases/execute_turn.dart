@@ -20,8 +20,8 @@ class ExecuteTurn implements UseCase<TurnResult, ExecuteTurnParams> {
   Future<Either<Failure, TurnResult>> call(ExecuteTurnParams params) async {
     try {
       // Get current participants for the group
-      final participants = await participantRepository
-          .getParticipantsByGroupId(params.groupId);
+      final participants =
+          await participantRepository.getParticipantsByGroupId(params.groupId);
 
       if (participants.isEmpty) {
         return const Left(ValidationFailure(
