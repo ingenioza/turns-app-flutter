@@ -8,14 +8,8 @@ import 'presentation/app/app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Initialize Firebase (gracefully handle missing config in dev)
-  try {
-    await Firebase.initializeApp();
-  } catch (e, st) {
-    // Allow app to boot without Firebase when GoogleService-Info.plist is missing.
-    debugPrint('[Firebase] Initialization skipped: $e');
-    debugPrint('$st');
-  }
+  // Initialize Firebase
+  await Firebase.initializeApp();
   
   // Configure dependency injection
   await configureDependencies();
