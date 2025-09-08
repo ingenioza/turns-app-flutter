@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../core/error/failures.dart';
 import '../../core/usecases/usecase.dart';
@@ -7,6 +8,7 @@ import '../repositories/participant_repository.dart';
 import '../services/turn_service.dart';
 
 /// Use case for executing a turn and selecting the next participant
+@injectable
 class ExecuteTurn implements UseCase<TurnResult, ExecuteTurnParams> {
   final TurnService turnService;
   final ParticipantRepository participantRepository;

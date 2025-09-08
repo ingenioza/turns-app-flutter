@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../core/error/failures.dart';
 import '../../core/usecases/usecase.dart';
@@ -6,6 +7,7 @@ import '../entities/participant.dart';
 import '../repositories/participant_repository.dart';
 
 /// Use case for getting participants from a group
+@injectable
 class GetParticipants
     implements UseCase<List<Participant>, GetParticipantsParams> {
   final ParticipantRepository repository;
