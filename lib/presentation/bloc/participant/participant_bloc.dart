@@ -149,8 +149,7 @@ class ParticipantBloc extends Bloc<ParticipantEvent, ParticipantState> {
     Emitter<ParticipantState> emit,
   ) async {
     try {
-      emit(const ParticipantLoading());
-
+      // Don't emit loading state for quick toggle operations
       final updatedParticipant = await participantRepository
           .updateParticipantStatus(event.participantId, event.isActive);
 

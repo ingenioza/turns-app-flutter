@@ -83,11 +83,54 @@ class ParticipantList extends StatelessWidget {
               ? () => onToggleStatus!(participant.id, !participant.isActive)
               : null,
           onRemove: onRemoveParticipant != null
-              ? () => onRemoveParticipant!(participant.id)
+              ? () => _showDeleteConfirmation(context, participant)
               : null,
         );
       },
     );
+  }
+
+  /// Show confirmation dialog before deleting participant
+  Future<void> _showDeleteConfirmation(
+    BuildContext context, 
+    Participant participant,
+  ) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Remove Participant'),
+        content: RichText(
+          text: TextSpan(
+            style: Theme.of(context).textTheme.bodyMedium,
+            children: [
+              const TextSpan(text: 'Are you sure you want to remove '),
+              TextSpan(
+                text: participant.name,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const TextSpan(text: ' from the group?'),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            style: FilledButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.error,
+            ),
+            child: const Text('Remove'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true && onRemoveParticipant != null) {
+      onRemoveParticipant!(participant.id);
+    }
   }
 }
 

@@ -59,6 +59,7 @@ dev_dependencies:
   # Testing
   mockito: ^5.4.4
   bloc_test: ^9.1.7
+  patrol: ^3.12.0
   
   # Code Generation
   build_runner: ^2.4.12

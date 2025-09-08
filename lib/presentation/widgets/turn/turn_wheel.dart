@@ -35,16 +35,17 @@ class _TurnWheelState extends State<TurnWheel> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _spinController = AnimationController(
-      duration: const Duration(seconds: 3),
+      duration: const Duration(milliseconds: 4000), // 4 seconds for better effect
       vsync: this,
     );
 
+    // Create a more realistic spinning animation with deceleration
     _spinAnimation = Tween<double>(
       begin: 0.0,
-      end: 4 * math.pi, // 2 full rotations
+      end: 6 * math.pi + (math.Random().nextDouble() * 2 * math.pi), // 3+ rotations with random final position
     ).animate(CurvedAnimation(
       parent: _spinController,
-      curve: Curves.decelerate,
+      curve: Curves.easeOutCubic, // Better deceleration curve
     ));
 
     _spinController.addStatusListener((status) {

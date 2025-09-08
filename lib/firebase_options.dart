@@ -58,7 +58,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBQ5pjBe_d2dzLaCppTluvy8jV2UGetivg',
-    appId: '1:204340310004:android:ce987a17d01a24d1a913a1',
+    appId: '1:204340310004:android:5648c217def721fda913a1',
     messagingSenderId: '204340310004',
     projectId: 'turns-ccc9e',
     storageBucket: 'turns-ccc9e.firebasestorage.app',
@@ -66,11 +66,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAOhMlOwZ0-M0bjn2NIfwNG_krGJ8PvTKg',
-    appId: '1:204340310004:ios:acc0ed8c4eca4c0da913a1',
+    appId: '1:204340310004:ios:c91178cc67920575a913a1',
     messagingSenderId: '204340310004',
     projectId: 'turns-ccc9e',
     storageBucket: 'turns-ccc9e.firebasestorage.app',
-    iosClientId: '204340310004-le4d7qtg7mbh4pofvcqtuqcidkpolseg.apps.googleusercontent.com',
-    iosBundleId: 'com.ingenio.turns.turnsFlutter',
+    iosClientId: '204340310004-60k802e655cn2l0tbq3oel41bt0qlph2.apps.googleusercontent.com',
+    iosBundleId: 'za.co.ingenio.turns',
   );
+
 }

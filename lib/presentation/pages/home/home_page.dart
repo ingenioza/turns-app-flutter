@@ -129,7 +129,9 @@ class _HomePageState extends State<HomePage> {
                     builder: (context, participantState) {
                       final participants = participantState is ParticipantLoaded
                           ? participantState.participants
-                          : <Participant>[];
+                          : participantState is ParticipantOperationSuccess
+                              ? participantState.participants
+                              : <Participant>[];
 
                       final selectedParticipant = turnState is TurnSuccess
                           ? turnState.selectedParticipant
@@ -146,9 +148,9 @@ class _HomePageState extends State<HomePage> {
                               participants: participants,
                               selectedParticipant: selectedParticipant,
                               isSpinning: isSpinning,
-                              size: 280,
+                              size: 250,
                             ),
-                            const SizedBox(height: 24),
+                            // const SizedBox(height: 16),
                             ElevatedButton.icon(
                               onPressed: participants.any((p) => p.isActive)
                                   ? () => _executeTurn(participants)
@@ -192,16 +194,29 @@ class _HomePageState extends State<HomePage> {
                     );
                   }
 
-                  if (state is ParticipantLoaded) {
+                  if (state is ParticipantLoaded ||
+                      state is ParticipantOperationSuccess) {
+                    final participants = state is ParticipantLoaded
+                        ? state.participants
+                        : (state as ParticipantOperationSuccess).participants;
+
+                    // Get statistics - use state's statistics if available, otherwise calculate
+                    final statistics = state is ParticipantLoaded
+                        ? state.statistics
+                        : context
+                            .read<ParticipantBloc>()
+                            .turnService
+                            .getTurnStatistics(participants);
+
                     return Column(
                       children: [
                         ParticipantSummary(
-                          participants: state.participants,
-                          statistics: state.statistics,
+                          participants: participants,
+                          statistics: statistics,
                         ),
                         Expanded(
                           child: ParticipantList(
-                            participants: state.participants,
+                            participants: participants,
                             onToggleStatus: (participantId, isActive) {
                               context.read<ParticipantBloc>().add(
                                     participant_events.ToggleParticipantStatus(
