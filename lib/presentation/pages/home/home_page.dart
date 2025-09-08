@@ -31,11 +31,18 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // Load demo participants for the home screen
-    _loadDemoParticipants();
+    // Load demo participants for the home screen after the widget is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadDemoParticipants();
+    });
   }
 
   void _loadDemoParticipants() {
+    // Load existing participants first to avoid duplicates
+    context.read<ParticipantBloc>().add(
+      participant_events.LoadParticipants(groupId: _demoGroupId),
+    );
+
     // Add some demo participants if none exist
     final demoParticipants = [
       Participant(
@@ -67,15 +74,13 @@ class _HomePageState extends State<HomePage> {
     // Add each participant (this will check for duplicates in the bloc)
     for (final participant in demoParticipants) {
       context.read<ParticipantBloc>().add(
-            participant_events.AddParticipant(
-              groupId: _demoGroupId,
-              participant: participant,
-            ),
-          );
+        participant_events.AddParticipant(
+          groupId: _demoGroupId,
+          participant: participant,
+        ),
+      );
     }
-  }
-
-  @override
+  }  @override
   void dispose() {
     _nameController.dispose();
     super.dispose();

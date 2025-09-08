@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../core/error/failures.dart';
 import '../../core/usecases/usecase.dart';
@@ -6,6 +7,7 @@ import '../entities/participant.dart';
 import '../repositories/participant_repository.dart';
 
 /// Use case for adding a participant to a group
+@injectable
 class AddParticipant implements UseCase<Participant, AddParticipantParams> {
   final ParticipantRepository repository;
 
@@ -37,6 +39,13 @@ class AddParticipant implements UseCase<Participant, AddParticipantParams> {
 
       final participant =
           await repository.createParticipant(params.participant);
+
+      // Add to the specific group using the repository method
+      await repository.addParticipantsToGroup(
+        params.groupId,
+        [participant],
+      );
+
       return Right(participant);
     } catch (e) {
       return Left(ServerFailure(message: e.toString()));
