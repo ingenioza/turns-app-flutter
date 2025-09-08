@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>204340310004-60k802e655cn2l0tbq3oel41bt0qlph2.apps.googleusercontent.com</string>
+	<string>204340310004-le4d7qtg7mbh4pofvcqtuqcidkpolseg.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.204340310004-60k802e655cn2l0tbq3oel41bt0qlph2</string>
+	<string>com.googleusercontent.apps.204340310004-le4d7qtg7mbh4pofvcqtuqcidkpolseg</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAOhMlOwZ0-M0bjn2NIfwNG_krGJ8PvTKg</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>za.co.ingenio.turns</string>
+	<string>com.ingenio.turns.turnsFlutter</string>
 	<key>PROJECT_ID</key>
 	<string>turns-ccc9e</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:204340310004:ios:c91178cc67920575a913a1</string>
+	<string>1:204340310004:ios:acc0ed8c4eca4c0da913a1</string>
 </dict>
 </plist>
