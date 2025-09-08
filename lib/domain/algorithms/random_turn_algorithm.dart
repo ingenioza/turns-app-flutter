@@ -12,7 +12,7 @@ class RandomTurnAlgorithm extends TurnAlgorithm {
   String get name => 'Random';
 
   @override
-  String get description => 
+  String get description =>
       'Selects participants randomly. Everyone has an equal chance.';
 
   @override
@@ -27,7 +27,7 @@ class RandomTurnAlgorithm extends TurnAlgorithm {
 
     final activeParticipants = getActiveParticipants(participants);
     final randomIndex = _random.nextInt(activeParticipants.length);
-    
+
     return activeParticipants[randomIndex];
   }
 }

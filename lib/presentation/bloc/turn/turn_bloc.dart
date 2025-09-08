@@ -13,7 +13,7 @@ import 'turn_state.dart';
 @injectable
 class TurnBloc extends Bloc<TurnEvent, TurnState> {
   final turn_usecase.ExecuteTurn executeTurnUseCase;
-  
+
   late final List<TurnAlgorithm> _availableAlgorithms;
   late TurnAlgorithm _selectedAlgorithm;
 
@@ -21,7 +21,7 @@ class TurnBloc extends Bloc<TurnEvent, TurnState> {
     required this.executeTurnUseCase,
   }) : super(const TurnInitial()) {
     _initializeAlgorithms();
-    
+
     on<LoadAlgorithms>(_onLoadAlgorithms);
     on<ChangeAlgorithm>(_onChangeAlgorithm);
     on<ExecuteTurn>(_onExecuteTurn);
@@ -53,7 +53,7 @@ class TurnBloc extends Bloc<TurnEvent, TurnState> {
     Emitter<TurnState> emit,
   ) async {
     _selectedAlgorithm = event.algorithm;
-    
+
     emit(AlgorithmSelectionState(
       availableAlgorithms: _availableAlgorithms,
       selectedAlgorithm: _selectedAlgorithm,

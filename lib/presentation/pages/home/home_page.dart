@@ -24,18 +24,25 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _nameController = TextEditingController();
   final _uuid = const Uuid();
-  
+
   // Demo group ID - in a real app this would come from navigation/routing
   final String _demoGroupId = 'demo-group-123';
 
   @override
   void initState() {
     super.initState();
-    // Load demo participants for the home screen
-    _loadDemoParticipants();
+    // Load demo participants for the home screen after the widget is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadDemoParticipants();
+    });
   }
 
   void _loadDemoParticipants() {
+    // Load existing participants first to avoid duplicates
+    context.read<ParticipantBloc>().add(
+      participant_events.LoadParticipants(groupId: _demoGroupId),
+    );
+
     // Add some demo participants if none exist
     final demoParticipants = [
       Participant(
@@ -73,9 +80,7 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     }
-  }
-
-  @override
+  }  @override
   void dispose() {
     _nameController.dispose();
     super.dispose();
@@ -124,7 +129,9 @@ class _HomePageState extends State<HomePage> {
                     builder: (context, participantState) {
                       final participants = participantState is ParticipantLoaded
                           ? participantState.participants
-                          : <Participant>[];
+                          : participantState is ParticipantOperationSuccess
+                              ? participantState.participants
+                              : <Participant>[];
 
                       final selectedParticipant = turnState is TurnSuccess
                           ? turnState.selectedParticipant
@@ -141,18 +148,18 @@ class _HomePageState extends State<HomePage> {
                               participants: participants,
                               selectedParticipant: selectedParticipant,
                               isSpinning: isSpinning,
-                              size: 280,
+                              size: 250,
                             ),
-                            const SizedBox(height: 24),
+                            // const SizedBox(height: 16),
                             ElevatedButton.icon(
                               onPressed: participants.any((p) => p.isActive)
                                   ? () => _executeTurn(participants)
                                   : null,
-                              icon: Icon(isSpinning 
-                                  ? Icons.hourglass_empty 
+                              icon: Icon(isSpinning
+                                  ? Icons.hourglass_empty
                                   : Icons.play_arrow),
-                              label: Text(isSpinning 
-                                  ? 'Spinning...' 
+                              label: Text(isSpinning
+                                  ? 'Spinning...'
                                   : 'Spin the Wheel!'),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.primary,
@@ -175,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            
+
             // Participants section
             Expanded(
               flex: 3,
@@ -187,31 +194,44 @@ class _HomePageState extends State<HomePage> {
                     );
                   }
 
-                  if (state is ParticipantLoaded) {
+                  if (state is ParticipantLoaded ||
+                      state is ParticipantOperationSuccess) {
+                    final participants = state is ParticipantLoaded
+                        ? state.participants
+                        : (state as ParticipantOperationSuccess).participants;
+
+                    // Get statistics - use state's statistics if available, otherwise calculate
+                    final statistics = state is ParticipantLoaded
+                        ? state.statistics
+                        : context
+                            .read<ParticipantBloc>()
+                            .turnService
+                            .getTurnStatistics(participants);
+
                     return Column(
                       children: [
                         ParticipantSummary(
-                          participants: state.participants,
-                          statistics: state.statistics,
+                          participants: participants,
+                          statistics: statistics,
                         ),
                         Expanded(
                           child: ParticipantList(
-                            participants: state.participants,
+                            participants: participants,
                             onToggleStatus: (participantId, isActive) {
                               context.read<ParticipantBloc>().add(
-                                participant_events.ToggleParticipantStatus(
-                                  participantId: participantId,
-                                  isActive: isActive,
-                                ),
-                              );
+                                    participant_events.ToggleParticipantStatus(
+                                      participantId: participantId,
+                                      isActive: isActive,
+                                    ),
+                                  );
                             },
                             onRemoveParticipant: (participantId) {
                               context.read<ParticipantBloc>().add(
-                                participant_events.RemoveParticipant(
-                                  groupId: _demoGroupId,
-                                  participantId: participantId,
-                                ),
-                              );
+                                    participant_events.RemoveParticipant(
+                                      groupId: _demoGroupId,
+                                      participantId: participantId,
+                                    ),
+                                  );
                             },
                           ),
                         ),
@@ -238,11 +258,11 @@ class _HomePageState extends State<HomePage> {
 
   void _executeTurn(List<Participant> participants) {
     context.read<TurnBloc>().add(
-      turn_events.ExecuteTurn(
-        groupId: _demoGroupId,
-        algorithm: RandomTurnAlgorithm(),
-      ),
-    );
+          turn_events.ExecuteTurn(
+            groupId: _demoGroupId,
+            algorithm: RandomTurnAlgorithm(),
+          ),
+        );
   }
 
   void _showAddParticipantDialog() {
@@ -278,11 +298,11 @@ class _HomePageState extends State<HomePage> {
                 );
 
                 context.read<ParticipantBloc>().add(
-                  participant_events.AddParticipant(
-                    groupId: _demoGroupId,
-                    participant: participant,
-                  ),
-                );
+                      participant_events.AddParticipant(
+                        groupId: _demoGroupId,
+                        participant: participant,
+                      ),
+                    );
 
                 _nameController.clear();
                 Navigator.of(context).pop();

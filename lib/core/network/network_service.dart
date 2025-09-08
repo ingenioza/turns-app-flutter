@@ -78,7 +78,7 @@ class NetworkService {
       final response = error.response;
       if (response?.data is Map<String, dynamic>) {
         final data = response!.data as Map<String, dynamic>;
-        
+
         // Try to extract error message from common API response formats
         if (data.containsKey('message')) {
           return data['message'] as String;
@@ -86,7 +86,8 @@ class NetworkService {
           final errorData = data['error'];
           if (errorData is String) {
             return errorData;
-          } else if (errorData is Map<String, dynamic> && errorData.containsKey('message')) {
+          } else if (errorData is Map<String, dynamic> &&
+              errorData.containsKey('message')) {
             return errorData['message'] as String;
           }
         } else if (data.containsKey('errors')) {
@@ -99,7 +100,7 @@ class NetworkService {
           }
         }
       }
-      
+
       // Fallback to status code message
       return 'Server error: ${response?.statusCode ?? 'Unknown'}';
     } catch (e) {

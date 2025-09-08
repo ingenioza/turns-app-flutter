@@ -91,8 +91,8 @@ class ParticipantBloc extends Bloc<ParticipantEvent, ParticipantState> {
     try {
       emit(const ParticipantLoading());
 
-      final updatedParticipant = await participantRepository
-          .updateParticipant(event.participant);
+      final updatedParticipant =
+          await participantRepository.updateParticipant(event.participant);
 
       // Get current group ID (assuming it's available in state or passed)
       // For now, we'll need to reload participants from the current state
@@ -149,8 +149,7 @@ class ParticipantBloc extends Bloc<ParticipantEvent, ParticipantState> {
     Emitter<ParticipantState> emit,
   ) async {
     try {
-      emit(const ParticipantLoading());
-
+      // Don't emit loading state for quick toggle operations
       final updatedParticipant = await participantRepository
           .updateParticipantStatus(event.participantId, event.isActive);
 
@@ -167,7 +166,8 @@ class ParticipantBloc extends Bloc<ParticipantEvent, ParticipantState> {
         ));
       }
     } catch (e) {
-      emit(ParticipantError('Failed to update participant status: ${e.toString()}'));
+      emit(ParticipantError(
+          'Failed to update participant status: ${e.toString()}'));
     }
   }
 

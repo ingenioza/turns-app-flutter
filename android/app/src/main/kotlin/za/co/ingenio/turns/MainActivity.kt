@@ -1,4 +1,4 @@
-package com.ingenio.turns.turns_flutter
+package za.co.ingenio.turns
 
 import io.flutter.embedding.android.FlutterActivity
 

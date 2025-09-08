@@ -27,8 +27,7 @@ class TurnWheel extends StatefulWidget {
   State<TurnWheel> createState() => _TurnWheelState();
 }
 
-class _TurnWheelState extends State<TurnWheel>
-    with TickerProviderStateMixin {
+class _TurnWheelState extends State<TurnWheel> with TickerProviderStateMixin {
   late AnimationController _spinController;
   late Animation<double> _spinAnimation;
 
@@ -36,20 +35,22 @@ class _TurnWheelState extends State<TurnWheel>
   void initState() {
     super.initState();
     _spinController = AnimationController(
-      duration: const Duration(seconds: 3),
+      duration: const Duration(milliseconds: 4000), // 4 seconds for better effect
       vsync: this,
     );
 
+    // Create a more realistic spinning animation with deceleration
     _spinAnimation = Tween<double>(
       begin: 0.0,
-      end: 4 * math.pi, // 2 full rotations
+      end: 6 * math.pi + (math.Random().nextDouble() * 2 * math.pi), // 3+ rotations with random final position
     ).animate(CurvedAnimation(
       parent: _spinController,
-      curve: Curves.decelerate,
+      curve: Curves.easeOutCubic, // Better deceleration curve
     ));
 
     _spinController.addStatusListener((status) {
-      if (status == AnimationStatus.completed && widget.onSpinComplete != null) {
+      if (status == AnimationStatus.completed &&
+          widget.onSpinComplete != null) {
         widget.onSpinComplete!();
       }
     });
@@ -72,9 +73,8 @@ class _TurnWheelState extends State<TurnWheel>
 
   @override
   Widget build(BuildContext context) {
-    final activeParticipants = widget.participants
-        .where((p) => p.isActive)
-        .toList();
+    final activeParticipants =
+        widget.participants.where((p) => p.isActive).toList();
 
     if (activeParticipants.isEmpty) {
       return SizedBox(
@@ -133,7 +133,7 @@ class _TurnWheelState extends State<TurnWheel>
               );
             },
           ),
-          
+
           // Center pointer
           Container(
             width: 30,
@@ -155,7 +155,7 @@ class _TurnWheelState extends State<TurnWheel>
               size: 24,
             ),
           ),
-          
+
           // Selected participant indicator
           if (widget.selectedParticipant != null && !widget.isSpinning)
             Positioned(
@@ -212,7 +212,7 @@ class WheelPainter extends CustomPainter {
     for (int i = 0; i < participants.length; i++) {
       final participant = participants[i];
       final startAngle = i * sweepAngle - math.pi / 2; // Start from top
-      
+
       // Determine segment color
       Color segmentColor;
       if (participant.color != null) {
@@ -227,9 +227,9 @@ class WheelPainter extends CustomPainter {
 
       // Highlight if selected
       if (participant == selectedParticipant) {
-        segmentColor = segmentColor.withOpacity(1.0);
+        segmentColor = segmentColor.withValues(alpha: 1.0);
       } else {
-        segmentColor = segmentColor.withOpacity(0.8);
+        segmentColor = segmentColor.withValues(alpha: 0.8);
       }
 
       // Draw segment
@@ -287,10 +287,10 @@ class WheelPainter extends CustomPainter {
 
       // Save canvas state
       canvas.save();
-      
+
       // Translate to text position
       canvas.translate(textX, textY);
-      
+
       // Rotate text to be readable
       final rotationAngle = textAngle + math.pi / 2;
       if (rotationAngle > math.pi / 2 && rotationAngle < 3 * math.pi / 2) {
@@ -313,6 +313,6 @@ class WheelPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant WheelPainter oldDelegate) {
     return participants != oldDelegate.participants ||
-           selectedParticipant != oldDelegate.selectedParticipant;
+        selectedParticipant != oldDelegate.selectedParticipant;
   }
 }

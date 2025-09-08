@@ -1,11 +1,11 @@
 # MVP Checklist
 
 ## Foundations
-- [ ] Repo bootstrap complete
-- [ ] CI green on base branch
-- [ ] Lint/format configured
+- [x] Repo bootstrap complete
+- [x] CI green on base branch
+- [x] Lint/format configured
 - [ ] .env / secrets templated
-- [ ] Basic README updated
+- [x] Basic README updated
 
 ## Auth & Identity
 - [ ] Anonymous session flow
@@ -13,14 +13,14 @@
 - [ ] Device token registration
 
 ## Core Domain
-- [ ] Groups: create/join/leave
-- [ ] Participants: add/remove/edit
-- [ ] Turn algorithms: random / round-robin / weighted
-- [ ] History & fairness metrics
+- [x] Groups: create/join/leave (basic group support implemented)
+- [x] Participants: add/remove/edit (full CRUD with UI)
+- [x] Turn algorithms: random / round-robin / weighted (+ fairness algorithm)
+- [x] History & fairness metrics (turn statistics implemented)
 - [ ] Notifications fan-out
 
 ## Quality Gates
-- [ ] Unit tests implemented
+- [x] Unit tests implemented (basic structure)
 - [ ] Integration tests implemented
 - [ ] E2E/browser/Patrol (per repo) implemented
 - [ ] Coverage thresholds met
@@ -28,4 +28,4 @@
 ## Docs & Ops
 - [ ] API contract current
 - [ ] Testing strategy current
-- [ ] Progress log updated
+- [x] Progress log updated

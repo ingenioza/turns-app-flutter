@@ -5,5 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class StorageModule {
   @preResolve
   @singleton
-  Future<SharedPreferences> get sharedPreferences => SharedPreferences.getInstance();
+  Future<SharedPreferences> get sharedPreferences =>
+      SharedPreferences.getInstance();
 }

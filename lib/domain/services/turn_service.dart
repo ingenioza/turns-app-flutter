@@ -7,16 +7,16 @@ import '../algorithms/turn_algorithm.dart';
 class TurnResult extends Equatable {
   /// The selected participant
   final Participant selectedParticipant;
-  
+
   /// Algorithm used for selection
   final TurnAlgorithm algorithm;
-  
+
   /// Timestamp when turn was executed
   final DateTime executedAt;
-  
+
   /// List of all participants at time of execution
   final List<Participant> allParticipants;
-  
+
   /// Previous turn history context
   final List<String> turnHistory;
 
@@ -41,7 +41,7 @@ class TurnResult extends Equatable {
 /// Service for executing turns and managing turn logic
 class TurnService {
   /// Executes a turn using the specified algorithm
-  /// 
+  ///
   /// Returns a [TurnResult] with the selected participant and context
   /// Throws [ArgumentError] if no participants are available
   TurnResult executeTurn({
@@ -60,7 +60,8 @@ class TurnService {
     }
 
     if (!algorithm.canApply(participants)) {
-      throw ArgumentError('Algorithm cannot be applied to current participants');
+      throw ArgumentError(
+          'Algorithm cannot be applied to current participants');
     }
 
     final selectedParticipant = algorithm.selectNext(
@@ -94,7 +95,7 @@ class TurnService {
   /// Gets statistics about turn distribution
   Map<String, dynamic> getTurnStatistics(List<Participant> participants) {
     final totalTurns = participants.fold<int>(
-      0, 
+      0,
       (sum, participant) => sum + participant.turnCount,
     );
 
@@ -102,9 +103,8 @@ class TurnService {
         .where((p) => p.isActive)
         .fold<int>(0, (sum, participant) => sum + participant.turnCount);
 
-    final averageTurns = participants.isNotEmpty 
-        ? totalTurns / participants.length 
-        : 0.0;
+    final averageTurns =
+        participants.isNotEmpty ? totalTurns / participants.length : 0.0;
 
     final maxTurns = participants.isNotEmpty
         ? participants.map((p) => p.turnCount).reduce((a, b) => a > b ? a : b)
